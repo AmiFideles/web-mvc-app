@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+        >
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+>
+
+<h:head>
+    <title>Лабораторная 3</title>
+    <link rel="icon" href="resources/img/cse_logo.png"/>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <script type="module" src="resources/js/main.js"></script>
+</h:head>
+
+<h:body>
+    <div id="main-container">
+        <div>
+            <div id="head-area" class="coloured-block floating-areas">
+                <span class="left-aligned">Iskandarov Shaxzodbkek</span>
+                <span class="right-aligned">Var: 3231201</span>
+                <span class="center-aligned">Group P32312</span>
+                <div class="center-aligned">
+                    <h:link value="Start page" outcome="redirect-index"/>
+                    <span>Main page</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="left-area" class="floating-areas">
+
+            <div id="graph-block" class="content-plate">
+                <div id="graph-heading" class="coloured-block">
+                    <span>Graph</span>
+                </div>
+                <div id="image">
+                    <ui:include src="resources/templates/graph.html"/>
+                </div>
+            </div>
+
+
+            <div id="form-block" class="content-plate">
+                <h:form id="values-form">
+                    <div id="x-block">
+                        <div id="xlabel" class="form-labels">
+                            <label>X</label>
+                        </div>
+
+                        <div id="x-buttons" class="input-areas">
+                            <ace:sliderEntry id="x" axis="x" clickableRail="true" min="0" max="12"
+                                             length="200px" stepPercent="#{mark.percent}" showLabels="true"
+                                             value="#{mark.position}">
+                                <ace:ajax event="slideEnd" execute="@this" render="@form"/>
+                            </ace:sliderEntry>
+                          <br/>
+                            <h:outputText id="sliderValue" value="#{mark.XValue}"/>
+
+                        </div>
+                    </div>
+                    <div id="y-block">
+                        <div id="ylabel" class="form-labels">
+                            <label>Y {-5; 3}</label>
+                        </div>
+                        <div>
+                            <h:inputText a:placeholoder="Введите значение y" autocomplete="off" id="y-input"
+                                         maxlength="6"
+                                         value="#{mark.YValue}"/>
+                        </div>
+
+                    </div>
+                    <div id="r-block ">
+                        <div id="rlabel" class="form-labels">
+                            <label>R</label>
+                        </div>
+                        <div id="r-checkbox" class="field-content-row">
+                            <ui:repeat value="#{mark.RValue.keySet()}" var="x">
+                                <h:selectBooleanCheckbox id="checkbox" name="r" value="#{mark.RValue[x]}"/>
+                                <h:outputLabel for="checkbox" value="#{x}"/>
+                            </ui:repeat>
+                        </div>
+                    </div>
+
+                    <div id="main-button-block">
+                        <h:commandButton value="Send"
+                                         type="button"
+                                         id="submit-button">
+                        </h:commandButton>
+                        <h:commandButton value="Clear form"
+                                         type="reset">
+                        </h:commandButton>
+                        <h:commandButton value="Clear table"
+                                         type="button"
+                                         action="#{storage.clear()}">
+                            <f:ajax render="result-table" onevent="removeDot"/>
+                        </h:commandButton>
+
+                        <h:commandButton style="display:none;" value="Отправить"
+                                         type="submit"
+                                         actionListener="#{submitHandler.submitHitResult()}"
+                                         id="submit-buttons">
+                            <f:ajax event="click" execute="@form" render="result-table" onevent="redrawDot"
+                                    onerror="redrawDot"/>
+                        </h:commandButton>
+                    </div>
+                </h:form>
+                <h:form style="display: none" id="hidden-graph-form">
+                    <h:inputText styleClass="graphX" value="#{mark.graphX}">
+                        <f:ajax event="change" execute="@all" render="hidden-graph-form"/>
+                    </h:inputText>
+                    <h:inputText styleClass="graphY" value="#{mark.graphY}">
+                        <f:ajax event="change" execute="@all" render="hidden-graph-form"/>
+                    </h:inputText>
+                    <h:inputText styleClass="graphR" value="#{mark.RValues}">
+                        <f:ajax event="change" execute="@all" render="hidden-graph-form"/>
+                    </h:inputText>
+
+                    <h:commandButton  value="Отправить"
+                                     type="submit"
+                                     actionListener="#{submitHandler.handGraphClick()}"
+                                     id="graph-submit-buttons">
+                        <f:ajax event="click" execute="@form" render="result-table" onevent="redrawDot"
+                                onerror="redrawDot"/>
+                    </h:commandButton>
+                </h:form>
+            </div>
+
+        </div>
+
+        <div id="right-area" class="floating-areas content-plate">
+            <div id="table-heading" class="coloured-block">
+                <span>Table</span>
+            </div>
+
+            <div id="table-scroll-container">
+                <h:dataTable var="hitResult" value="#{storage.hits}" id="result-table">
+                    <h:column>
+                        <f:facet name="header">X</f:facet>
+                        #{hitResult.XValue}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Y</f:facet>
+                        #{hitResult.YValue}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">R</f:facet>
+                        #{hitResult.RValue}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Result</f:facet>
+                        #{hitResult.result}
+                    </h:column>
+                </h:dataTable>
+            </div>
+
+        </div>
+
+    </div>
+    <h:outputScript library="js" name="jquery-3.6.1.min.js"/>
+    <h:outputScript library="js" name="requred.js"/>
+</h:body>
+</html>

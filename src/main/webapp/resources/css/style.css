@@ -1,0 +1,259 @@
+body {
+    font-size: 16px;
+    font-family: "Century", fantasy;
+    background-color: #8484b6;
+}
+form {
+    padding: 10px;
+}
+
+#table-scroll-container {
+    bottom: 0;
+    right: 0;
+    top: 60px;
+    width: 100%;
+    height: 500px;
+    overflow-y: scroll;
+}
+
+#result-table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+#main-button-block {
+    padding: 5px;
+    text-align: center;
+}
+
+.coloured-block {
+    text-align: center;
+    background-color: #0a0a38;
+    padding: 1em;
+    font-size: 20px;
+}
+
+.content-plate {
+    background-color: white;
+}
+
+.form-labels {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+
+#form-block {
+    display: inline-block;
+    width: 100%;
+    height: 340px;
+    margin-left: 2px;
+    text-align: left;
+}
+
+.content-plate {
+    display: inline-block;
+}
+
+.input-areas {
+    display: inline;
+    width: 100%;
+    margin-left: 1px;
+    text-align: left;
+
+}
+
+.main-button {
+    display: inline-block;
+}
+
+.floating-areas {
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+}
+#head-area {
+    width: 95%;
+    padding: 20px;
+    margin-bottom: 30px;
+    margin-left: 2%;
+    margin-right: 2%;
+    color: #ffffff;
+    font-size: 20px;
+    background-color: #0a0a38;
+    text-align: center;
+}
+
+#left-area {
+    width: 300px;
+    margin: 0 0 5% 7%
+}
+
+#right-area {
+    width: 56.5%;
+    height: 563px;
+    overflow: auto;
+    margin-left: 7%;
+
+}
+
+#graph-block {
+    width: 300px;
+    height: 364px;
+    border-color: black;
+    margin-bottom: 20px;
+}
+
+svg {
+    cursor: crosshair;
+}
+button {
+    border-width: 1px;
+    border-color: #0a0a38;
+    background-color: white;
+}
+
+input, select {
+    border-width: 1px;
+    border-color: #0a0a38;
+}
+
+tr {
+    height: 25px;
+}
+
+.x-button {
+    font-size: 16px;
+}
+.r-select{
+    padding: 3px;
+    font-size: 16px;
+}
+
+#x-block {
+    margin-bottom: 25px;
+}
+
+#y-block {
+    margin-bottom: 25px;
+}
+
+.x-button:hover {
+    background-color: #8484b6;
+}
+
+.x-button.selected, .main-button:hover {
+    background-color: #0a0a38;
+    color: #f6fafb;
+}
+
+.button-error .x-button, .input-error {
+    border-width: 2px;
+    border-color: red;
+}
+
+.coloured-block > span {
+    color: #f6fafb;
+}
+
+
+
+.graph-point {
+    stroke: black;
+}
+
+.graph-axle-line {
+    stroke: black;
+}
+
+
+
+.left-aligned {
+    float: left;
+}
+
+.right-aligned {
+    float: right;
+}
+
+.dotted-line-x,
+.dotted-line-y {
+    stroke: black;
+    stroke-dasharray: 2;
+}
+
+.tempCircle {
+    stroke: black;
+}
+
+
+
+
+.dotted-raw-x,
+.dotted-raw-y {
+    stroke: #ef5b5b;
+    stroke-dasharray: 5;
+}
+
+#form-block {
+    padding: 0 10px 10px 0;
+}
+
+.x-button {
+    padding: 3px;
+}
+
+#y-input {
+    width: 75%;
+}
+
+.wrong-value {
+    color: red;
+    border: solid;
+}
+
+.miss {
+    background-color: #ef5b5b;
+}
+
+.hit {
+    background-color: limegreen;
+}
+
+.true {
+    stroke: limegreen;
+    fill: limegreen;
+}
+
+.false {
+    stroke: #ef5b5b;
+    fill: #ef5b5b;
+}
+
+#table-header {
+    background-color: #d0d0d9;
+}
+
+#result-table tr:nth-child(n):hover {
+    background-color: #d0d0d9;
+}
+.ice-ace-slider-label-right,
+.ice-ace-slider-label-left{
+    display: none;
+}
+#values-form\:sliderValue{
+    margin-left: 85px;
+}
+input[type=button]:hover{
+    background-color: #8484b6;
+}
+input[type=reset]:hover{
+    background-color: #8484b6;
+}
+#_t8{
+    margin-left: 108px;
+}
+#start-span{
+    margin-left: 108px;
+}
